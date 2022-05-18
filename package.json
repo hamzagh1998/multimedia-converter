@@ -1,0 +1,27 @@
+{
+  "name": "multimedia-converter",
+  "version": "1.0.0",
+  "description": "free and open source tool for multimedia converting created with nodejs",
+  "main": "server.js",
+  "engines": {
+    "node": "16.x"
+  },
+  "scripts": {
+    "install-server-dep": "npm install --prefix server",
+    "install-client-dep": "npm install --prefix client",
+    "install": "npm run install-server-dep && npm run install-client-dep",
+    "start-server": "npm run start --prefix server",
+    "start-client": "npm run start --prefix client",
+    "start": "npm run start-server"
+  },
+  "keywords": [
+    "multimedia",
+    "convert",
+    "manipulation"
+  ],
+  "author": "Hamza Ghenimi",
+  "license": "ISC",
+  "dependencies": {
+    "react-scripts": "^5.0.1"
+  }
+}
