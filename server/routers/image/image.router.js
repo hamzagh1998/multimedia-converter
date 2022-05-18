@@ -1,23 +1,36 @@
+const path = require("path");
 const { Router } = require("express");
 const { v4: uuidv4 } = require("uuid");
 const multer  = require("multer");
+
+const { ImageService } = require("../../services/image.service");
+
+const { tryToCatch } = require("../../utils/try-to-catch");
+
+const inputPath = path.join(__dirname, "..", "..", "uploads", "images", "input");
+const outputPath = path.join(__dirname, "..", "..", "uploads", "images", "output");
+
 const storage = multer.diskStorage(
   { 
     destination(req, file, cb) {
-      cb(null, path.join(__dirname, "..", "..", "uploads", "images"));
+      cb(null, inputPath);
     },
     filename(req, file, cb) {
-      cb(null, file.originalname + uuidv4());
+      cb(null, uuidv4() + "-" + file.originalname);
     }
   }
 );
 
 const upload = multer({ storage: storage, limits: { fileSize: 1 * 1024 * 1024 * 50 } })
-                .array("payload", 10); // 50 mb
+                .single("payload"); // 50 mb
 
 const ImageRouter = Router();
 
-ImageRouter.get("/get-image/:slug", (req, res) => res.sendFile(path.join(__dirname, "..", "..", "uploads", "images", req.params.slug)));
-ImageRouter.post("/convert-image", upload);
+ImageRouter.get("/get-image/:slug", (req, res) => res.sendFile(outputPath + "/" + req.params.slug));
+ImageRouter.post("/convert-image", upload, async (req, res) => {
+
+  ImageService.convertImageThrowBuffer(res, 11, req.file.path, outputPath, req.body.ext);
+
+});
 
 module.exports = ImageRouter;

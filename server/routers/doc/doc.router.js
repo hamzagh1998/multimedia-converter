@@ -21,24 +21,19 @@ const storage = multer.diskStorage(
   }
 );
 const upload = multer({ storage: storage, limits: { fileSize: 1 * 1024 * 1024 * 200 } })
-                .array("payload", 200); // 200 mb
+                .single("payload"); // 200 mb
 
 const DocRouter = Router();
 
 DocRouter.get("/get-doc/:slug", (req, res) => res.sendFile(outputPath + "/" + req.params.slug));
 DocRouter.post("/convert-doc", upload, async (req, res) => {
 
-  const convertedDocs = [];
-
-  for (file of req.files) {
-    const [error, data] = await tryToCatch(
-      DocService.convertDoc, file.filename, file.path, outputPath, req.body.ext
-    );
-    if (error) convertedDocs.push({converted: false, detail: "Coulden't convert: " + file.originalname});
-    else convertedDocs.push({converted: true, detail: data});
-  };
-
-  return res.json({ error: false, detail: convertedDocs });
+  const file = req.file;
+  const [error, data] = await tryToCatch(
+    DocService.convertDoc, file.filename, file.path, outputPath, req.body.ext
+  );
+  if (error) res.json({error: true, detail: {fileId: req.body.fileId}});
+  else res.json({error: false, detail: {path: data, fileId: req.body.fileId}});
 
 });
 
