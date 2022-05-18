@@ -8,4 +8,4 @@ async function tryToCatch(fn, ...args) {
 
 };
 
-module.exports = tryToCatch;
+module.exports = { tryToCatch };

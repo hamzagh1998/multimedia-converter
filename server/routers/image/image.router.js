@@ -4,7 +4,7 @@ const multer  = require("multer");
 const storage = multer.diskStorage(
   { 
     destination(req, file, cb) {
-      cb(null, "/uploads/images");
+      cb(null, path.join(__dirname, "..", "..", "uploads", "images"));
     },
     filename(req, file, cb) {
       cb(null, file.originalname + uuidv4());
@@ -17,7 +17,7 @@ const upload = multer({ storage: storage, limits: { fileSize: 1 * 1024 * 1024 * 
 
 const ImageRouter = Router();
 
-ImageRouter.get("/get-image/:slug", (req, res) => res.sendFile(__dirname+`/uploads/images/${req.params.slug}`));
+ImageRouter.get("/get-image/:slug", (req, res) => res.sendFile(path.join(__dirname, "..", "..", "uploads", "images", req.params.slug)));
 ImageRouter.post("/convert-image", upload);
 
 module.exports = ImageRouter;

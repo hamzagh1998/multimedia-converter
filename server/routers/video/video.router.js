@@ -4,7 +4,7 @@ const multer  = require("multer");
 const storage = multer.diskStorage(
   { 
     destination(req, file, cb) {
-      cb(null, "/uploads/videos");
+      cb(null, path.join(__dirname, "..", "..", "uploads", "videos"));
     },
     filename(req, file, cb) {
       cb(null, file.originalname + uuidv4());
@@ -17,7 +17,7 @@ const upload = multer({ storage: storage, limits: { fileSize: 1 * 1024 * 1024 * 
 
 const VideoRouter = Router();
 
-VideoRouter.get("/get-video/:slug", (req, res) => res.sendFile(__dirname+`/uploads/videos/${req.params.slug}`));
+VideoRouter.get("/get-video/:slug", (req, res) => res.sendFile(path.join(__dirname, "..", "..", "uploads", "videos", req.params.slug)));
 VideoRouter.post("/convert-video", upload);
 
 module.exports = VideoRouter;

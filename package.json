@@ -1,7 +1,7 @@
 {
   "name": "multimedia-converter",
   "version": "1.0.0",
-  "description": "free and open source tool for multimedia converting created with nodejs",
+  "description": "a free and open-source tool for multimedia converting created with node.js",
   "main": "server.js",
   "engines": {
     "node": "16.x"
