@@ -20,7 +20,7 @@ class DocService {
     // Here in done you have pdf file which you can save or transfer in another stream
     await fs.writeFile(newOutputPath, outputBuf);
 
-    return newOutputPath;
+    return {newFilename, newOutputPath};
   };
 
 };

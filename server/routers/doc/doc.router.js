@@ -33,7 +33,7 @@ DocRouter.post("/convert-doc", upload, async (req, res) => {
     DocService.convertDoc, file.filename, file.path, outputPath, req.body.ext
   );
   if (error) res.json({error: true, detail: {fileId: req.body.fileId}});
-  else res.json({error: false, detail: {path: data, fileId: req.body.fileId}});
+  else res.json({error: false, detail: {filename: data.newFilename, path: data.newOutputPath, fileId: req.body.fileId}});
 
 });
 

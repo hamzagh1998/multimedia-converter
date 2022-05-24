@@ -5,7 +5,6 @@ const multer  = require("multer");
 
 const { ImageService } = require("../../services/image.service");
 
-const { tryToCatch } = require("../../utils/try-to-catch");
 
 const inputPath = path.join(__dirname, "..", "..", "uploads", "images", "input");
 const outputPath = path.join(__dirname, "..", "..", "uploads", "images", "output");
