@@ -1,23 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import logo from "./logo.png"
+
+import { Main } from "./main"
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <img className={false && "App-logo"} src={logo} alt="logo" />
+      <h1>Multimedia Converter</h1>
+      <h3>Easily convert files from one format to another online, for free.</h3>
+      <Main />
     </div>
   );
 }

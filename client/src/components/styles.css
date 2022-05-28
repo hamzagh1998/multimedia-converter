@@ -1,0 +1,44 @@
+.box {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  height: 50px;
+  width: 95%;
+  margin: auto;
+  color: #222f3e;
+  background-color: #c8d6e5;
+  border-bottom: 2px solid #fff;
+  border-radius: 10px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-around;
+  width: 300px;
+}
+
+select {
+
+  /* styling */
+  background-color: white;
+  border: thin solid blue;
+  border-radius: 4px;
+  display: inline-block;
+  font: inherit;
+  line-height: 1.5em;
+  padding: 0.5em 3.5em 0.5em 1em;
+
+  /* reset */
+
+  margin: 0;      
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #000;
+}
